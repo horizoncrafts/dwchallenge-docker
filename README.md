@@ -46,6 +46,11 @@ To stop or start a containter (like suspending and waking up):
 docker stop [container id]
 docker start [container id]
 ```
+Connect to command line of a container:
+```
+docker exec -it [container id] /bin/bash
+```
+or use exclamation mark in python cell in jupyter notebook.
 
 # docker-compose.yml example
 ```
@@ -66,3 +71,13 @@ services:
 # References
 
 This image is somehow inspired on the Continuum Analytics original one (https://hub.docker.com/_/anaconda), plus it has the minimum stuff required for Data Workshop challenges.
+
+# Notes
+
+## Data Workshop challengers! 
+
+When solving a given challenge always use the image tagged with the previous challenge. For example, when you're at challenge 4 use image tagged "challenge03" instead of `latest`. It looks like this:
+```
+docker run -p 8888:8888 -v "c:\Users\me\notebooks":/data/notebooks horizoncrafts/dwchallenge:challenge03
+```
+That way you can excercise all tasks within a challenge.
