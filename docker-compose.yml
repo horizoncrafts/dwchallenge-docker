@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  jupyter:
+    build:
+      context: .
+    ports:
+      - 8888:8888
+    volumes:
+      - type: bind
+        source: ..
+        target: /data/notebooks
