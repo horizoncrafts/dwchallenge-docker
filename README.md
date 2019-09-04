@@ -28,7 +28,7 @@ http://localhost:8888/tree?token=my_secret_token
 ```
 Check this note: https://jupyter-notebook.readthedocs.io/en/latest/security.html#alternatives-to-token-authentication to learn more about authentication.
 
-## Docker operations
+## Docker command line operations
 Check running containers:
 ```
 docker ps
@@ -80,4 +80,4 @@ When solving a given challenge always use the image tagged with the previous cha
 ```
 docker run -p 8888:8888 -v "c:\Users\me\notebooks":/data/notebooks horizoncrafts/dwchallenge:challenge03
 ```
-That way you can excercise all tasks within a challenge.
+This way you can excercise all tasks within a challenge.
