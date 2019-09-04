@@ -27,6 +27,9 @@ RUN conda install -y --quiet python-socketio && conda install -y --quiet -c cond
 # additional packages for challange04: pyLDAvis, seaborn, gensim (used pip for gensim as conda installed older version)
 RUN conda install -y --quiet -c conda-forge pyLDAvis seaborn && pip install gensim
 
+# additional packages for gradient boosting
+RUN conda install -c conda-forge -y catboost xgboost
+
 #disabling any authentication
 RUN jupyter notebook --generate-config && \
     printf "\n#added by dockerfile\nfrom os import environ\nc.NotebookApp.token = environ.get('JUPYTER_TOKEN', '')\nc.NotebookApp.password = ''\n" >> ~/.jupyter/jupyter_notebook_config.py 
