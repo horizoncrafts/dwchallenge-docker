@@ -29,7 +29,7 @@ RUN conda install -y --quiet -c conda-forge pyLDAvis seaborn && pip install gens
 
 #disabling any authentication
 RUN jupyter notebook --generate-config && \
-    printf "\n#added by dockerfile\nc.NotebookApp.token = '' \nc.NotebookApp.password = ''\n" >> ~/.jupyter/jupyter_notebook_config.py 
+    printf "\n#added by dockerfile\nfrom os import environ\nc.NotebookApp.token = environ.get('JUPYTER_TOKEN', '')\nc.NotebookApp.password = ''\n" >> ~/.jupyter/jupyter_notebook_config.py 
 
 WORKDIR /data/notebooks
 
