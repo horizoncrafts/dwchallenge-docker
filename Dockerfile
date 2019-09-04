@@ -24,7 +24,7 @@ RUN conda install -y --quiet tensorflow && conda install -y --quiet keras
 # additional packages for challange03: python-socketio, eventlet, flask 
 RUN conda install -y --quiet python-socketio && conda install -y --quiet -c conda-forge eventlet && conda install -y --quiet flask
 
-# additional packages for challange04: pyLDAvis, gensim
+# additional packages for challange04: pyLDAvis, seaborn, gensim (used pip for gensim as conda installed older version)
 RUN conda install -y --quiet -c conda-forge pyLDAvis seaborn && pip install gensim
 
 #disabling any authentication
