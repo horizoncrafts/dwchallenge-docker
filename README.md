@@ -3,49 +3,63 @@ A docker image for Machine Learning exercises. Contains Anaconda plus some extra
 
 # Usage
 
-**Warning**: There's no authentication at all in this version. Check this note: https://jupyter-notebook.readthedocs.io/en/latest/security.html#alternatives-to-token-authentication
+## Setup
 
-**Warning**: After the first execution this will take more then 5GB of your diskspace.
+**Warning**: At the first execution this can download and take more then 5GB of your diskspace.
 
-## Simple
-
-Having docker installed and downloaded/cloned these files, change directory (cd) to where the files are and run:
+Having docker installed you can execute jupyter notebook to work with your notebooks like that:
 ```
-docker-compose up
+docker run -p $your_port:8888 -e JUPYTER_TOKEN=$your_secret_token -v $your_notebooks_folder_path:/data/notebooks horizoncrafts/dwchallenge:latest
+```
+where:
+- `$your_port` can be any port available on your local host (your notebook, for exmple). 8888 works usually.
+- `$your_secret_token` is the token required when you login to jupyter notebook. Leave it empty or skip `-e JUPYTER_TOKEN=$your_secret_token` part so your coleagues on the same network can access your jupyter notbook without restricton (if not firewalled). Otherwise they'll need to provide the token (more secure).
+- `$your_notebooks_folder_path` is a folder where your notebooks are located on your computer.
+
+In the simplest case you can have it started like that:
+```
+docker run -p 8888:8888 -v "c:\Users\me\notebooks":/data/notebooks horizoncrafts/dwchallenge:latest
+```
+then go to `http://localhost:8888`
+
+If protecting with a token you'll be asked to type it in. You can also connect to jupyter notbook providing token in the url, for exmple:
+```
+http://localhost:8888/tree?token=my_secret_token
+```
+Check this note: https://jupyter-notebook.readthedocs.io/en/latest/security.html#alternatives-to-token-authentication to learn more about authentication.
+
+## Docker operations
+Check running containers:
+```
+docker ps
+```
+all containers, including stoped:
+```
+docker ps -a
+```
+To kill a container (opposite to `docker run` described above):
+```
+docker kill [container id]
+```
+To stop or start a containter (like suspending and waking up):
+```
+docker stop [container id]
+docker start [container id]
 ```
 
-For the first time it's going to take few to twenty minutes to build the image, but the consequential runs will be very fast.
-
-Once the service has started go to your web browser and navigate to `https://localhost:8888`. **No authentication required!**
-
-## Some customization
-
-To work on jupyter notebooks located on your computer edit the `docker-compose.yml` :
-```
-    volumes:
-      - type: bind
-        source: [location of your notebooks on the host filesystem]
-        target: /data/notebooks
-```
-
-Wanna change the port? Edit:
-```
-    ports:
-      - [your favorite port]:8888
-```
-
-## Complete docker-compose.yml
+# docker-compose.yml example
 ```
 version: '3.7'
 services:
   jupyter:
-    build:
-      context: .
+    image: horizoncrafts/dwchallenge:latest
     ports:
-      - 8888:8888
+      - $your_port:8888
+    environment:
+      JUPYTER_TOKEN: $your_secret_token
     volumes:
       - type: bind
-        source: ..
+        source: $your_notebooks_folder_path
         target: /data/notebooks
 ```
 
