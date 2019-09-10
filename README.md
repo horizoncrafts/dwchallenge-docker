@@ -76,7 +76,7 @@ This image is somehow inspired on the Continuum Analytics original one (https://
 
 ## Data Workshop challengers! 
 
-When solving a given challenge always use the image tagged with the previous challenge. For example, when you're at challenge 4 use image tagged "challenge03" instead of `latest`. It looks like this:
+Each tag represents the state of the container at the completion of a given challange. Thus when solving a given challenge always use the image tagged with the previous challenge. For example, when you're at challenge 4 use image tagged "challenge03" instead of `latest`. It looks like this:
 ```
 docker run -p 8888:8888 -v "c:\Users\me\notebooks":/data/notebooks horizoncrafts/dwchallenge:challenge03
 ```
